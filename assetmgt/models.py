@@ -2,6 +2,7 @@ from django.db import models
 from qux.models import CoreModel
 from django.urls import reverse
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 
 ASSET_TYPE = [
     ("CPU", "CPU"),
@@ -11,7 +12,7 @@ ASSET_TYPE = [
 ]
 
 
-class User(CoreModel):
+class Users(User):
     emp_id = models.CharField(max_length=10, verbose_name="Employee ID")
     emp_name = models.CharField(max_length=50, verbose_name="Name")
 
@@ -28,7 +29,12 @@ class AssetModel(CoreModel):
     date_procured = models.DateField(verbose_name="Date Procured")
     price = models.FloatField(verbose_name="Price")
     user = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, null=True, default=None, verbose_name="User"
+        User,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        default=None,
+        blank=True,
+        verbose_name="User",
     )
     date_allotted = models.DateField(
         null=True, default=None, verbose_name="Date Allotted"

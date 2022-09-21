@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import AssetModel, User
+from .models import AssetModel, Users
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
@@ -19,8 +19,13 @@ class AssetView(ListView):
 
 # view for all users available
 class UserView(ListView):
-    model = User
+    model = Users
     template_name = "assetmgt/all_users.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context
 
 
 # view for specific asset and accessories attached to it and user allotted

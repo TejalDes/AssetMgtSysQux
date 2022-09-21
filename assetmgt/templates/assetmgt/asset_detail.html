@@ -1,21 +1,32 @@
-<table>
-    <tr>
-        <th>Model ID</th>
-        <th>Brand</th>
-        <th>Asset Type</th>
-        <th>Date Procured</th>
-        <th>Price</th>
-        <th>User</th>
-        <th>Date Allotted</th>
-    </tr>
-    <tr>
-        <td>{{object.model_id}}</td>
-        <td>{{object.brand_name}}</td>
-        <td>{{object.type_of_asset}}</td>
-        <td>{{object.date_procured}}</td>
-        <td>{{object.price}}</td>
-        <td>{{object.user.name}}</td>
-        <td>{{object.date_allotted}}</td>
-    </tr>
-</table>
-        
+{%extends '_blank.html'%}   
+{%block qux_content%} 
+<div class="col d-flex justify-content-center" style="padding:20px;">
+  <div class="card" style="width: 18rem; border:2px solid grey;">
+    <div class="card-body">
+      <h5 class="card-title">Asset: {{object.id}}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Model ID: {{object.model_id}}</li>
+      <li class="list-group-item">Brand: {{object.brand_name}}</li>
+      <li class="list-group-item">Asset Type: {{object.type_of_asset}}</li>
+      <li class="list-group-item">Date Procured: {{object.date_procured}}</li>
+      <li class="list-group-item">Price: {{object.price}}</li>
+      <li class="list-group-item">User: {{object.user.name}}</li>
+      <li class="list-group-item">Date Allotted: {{object.date_allotted}}</li>
+    </ul>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col">
+                <a href="{%url 'assetmgt:update' object.id%}" class="btn btn-secondary">Update</a>
+            </div>
+            <div class="col">
+                <a href="{%url 'assetmgt:delete' object.id %}" class="btn btn-secondary">Delete</a>
+            <div>
+          </div>
+    </div>
+  </div>
+<div>
+{%endblock%}
+
+
+
