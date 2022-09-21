@@ -1,0 +1,11 @@
+<form action='' method = 'POST'>
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table> 
+
+    {%for field in form%}
+       {{field.}}
+    {%endfor%}
+<button type='submit'>Submit</button>
+</form>
