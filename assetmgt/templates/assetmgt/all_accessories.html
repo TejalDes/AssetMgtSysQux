@@ -18,7 +18,7 @@ a{
 </style>
 
 <div>
-    <h3 style="text-align:center; padding:20px;">Assets Available</h3>
+    <h3 style="text-align:center; padding:20px;">Accessories Available</h3>
 </div>
 
 <div class="container" style="text-align:center; padding:20px;">
@@ -26,15 +26,15 @@ a{
       <div class="col">
       </div>
       <div class="col">
-        <select id="type" onchange = "display();" style="float:left; padding:5px;border-radius:5px;">
+        {% comment %} <select id="type" onchange = "display();" style="float:left; padding:5px;border-radius:5px;">
             <option value="All">Assets</option>
             <option value="CPU">CPU</option>
             <option value="Keyboard">Keyboard</option>
             <option value="Mouse">Mouse</option>
             <option value="Monitor">Monitor</option>
-        </select> 
+        </select>  {% endcomment %}
         
-        <a href="{%url 'assetmgt:add' %}" style="">Add Asset</a>
+        <a href="{%url 'assetmgt:acc_add' %}" style="">Add Accessory</a>
       </div>
       <div class="col">
       </div>
@@ -43,28 +43,20 @@ a{
 
 <div class="container">
     <div class="row">
-      <div class="col-md-5 offset-md-2">
+      <div class="col-md-5 offset-md-4">
         <table class="table table-hover" style="border:3px solid black">
             <tr style="background-color:#b4b4b4;">
                 <th>ID</th>
                 <th>Model ID</th>
-                <th>Brand</th>
                 <th>Type</th>
-                <th>Date Procured</th>
-                <th>Price</th>
-                <th>User</th>
-                <th>Date Allotted</th>
+                <th>Asset</th>
             </tr>
-            {%for obj in assetmodel_list%}
+            {%for obj in accessories_list%}
             <tr onclick="showdetails({{obj.id}});">
                 <td>{{obj.id}}</td>
                 <td>{{obj.model_id}}</td>
-                <td>{{obj.brand_name}}</td>
-                <td>{{obj.type_of_asset}}</td>
-                <td>{{obj.date_procured}}</td>
-                <td>{{obj.price}}</td>
-                <td>{{obj.user}}</td>
-                <td>{{obj.date_allotted}}</td>
+                <td>{{obj.accessory_type}}</td>
+                <td>{{obj.asset}}</td>
             </tr>
             {%empty%}
                 <p>No Data</p>
@@ -82,7 +74,7 @@ a{
 <script>
     function showdetails(id){
         console.log(id)
-        window.location.replace(window.location.origin +"/assetmgt/"+id)
+        window.location.replace(window.location.origin +"/assetmgt/accessories/detail/"+id)
     }
 
     function display(){

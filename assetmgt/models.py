@@ -12,14 +12,6 @@ ASSET_TYPE = [
 ]
 
 
-class Users(User):
-    emp_id = models.CharField(max_length=10, verbose_name="Employee ID")
-    emp_name = models.CharField(max_length=50, verbose_name="Name")
-
-    def __str__(self):
-        return self.emp_name
-
-
 class AssetModel(CoreModel):
     model_id = models.CharField(max_length=20, verbose_name="Model ID")
     brand_name = models.CharField(max_length=15, verbose_name="Brand")
@@ -40,8 +32,8 @@ class AssetModel(CoreModel):
         null=True, default=None, verbose_name="Date Allotted"
     )
 
-    # def __str__(self):
-    #     return str(id) + self.type_of_asset
+    def __str__(self):
+        return str(self.id) + self.type_of_asset
 
     def get_absolute_url(self):
         return reverse("assetmgt:assetdetail", kwargs={"pk": self.pk})
@@ -54,8 +46,8 @@ class Accessories(CoreModel):
         AssetModel, on_delete=models.CASCADE, verbose_name="Of Asset"
     )
 
-    # def __str__(self):
-    #     return str(id) + self.accessory_type
+    def get_absolute_url(self):
+        return reverse("assetmgt:accessorydetail", kwargs={"pk": self.pk})
 
 
 # class AssetForm(ModelForm):

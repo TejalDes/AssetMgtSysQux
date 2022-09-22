@@ -1,31 +1,38 @@
 {%extends '_blank.html'%}   
 {%block qux_content%} 
-<div class="col d-flex justify-content-center" style="padding:20px;">
-  <div class="card" style="width: 18rem; border:2px solid grey;">
-    <div class="card-body">
-      <h5 class="card-title">Asset: {{object.id}}</h5>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Model ID: {{object.model_id}}</li>
-      <li class="list-group-item">Brand: {{object.brand_name}}</li>
-      <li class="list-group-item">Asset Type: {{object.type_of_asset}}</li>
-      <li class="list-group-item">Date Procured: {{object.date_procured}}</li>
-      <li class="list-group-item">Price: {{object.price}}</li>
-      <li class="list-group-item">User: {{object.user.name}}</li>
-      <li class="list-group-item">Date Allotted: {{object.date_allotted}}</li>
-    </ul>
-    <div class="card-body">
-        <div class="row g-3">
-            <div class="col">
-                <a href="{%url 'assetmgt:update' object.id%}" class="btn btn-secondary">Update</a>
+{%block carddata%}
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-center" style="padding:20px;">
+            <div class="card" style="width: 18rem; border:2px solid grey;">
+                <div class="card-body">
+                    <h5 class="card-title">Asset: {{object.id}}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">Model ID: {{object.model_id}}</li>
+                <li class="list-group-item">Brand: {{object.brand_name}}</li>
+                <li class="list-group-item">Asset Type: {{object.type_of_asset}}</li>
+                <li class="list-group-item">Date Procured: {{object.date_procured}}</li>
+                <li class="list-group-item">Price: {{object.price}}</li>
+                <li class="list-group-item">User: {{object.user}}</li>
+                <li class="list-group-item">Date Allotted: {{object.date_allotted}}</li>
+                </ul>
             </div>
-            <div class="col">
-                <a href="{%url 'assetmgt:delete' object.id %}" class="btn btn-secondary">Delete</a>
-            <div>
-          </div>
-    </div>
-  </div>
+        </div>
+    </div> 
 <div>
+{%endblock carddata%}  
+
+    
+<div class="container">  
+    <div class="col d-flex justify-content-center offset-md-5" >
+        <div class="col" style="padding:5px;">
+            <a href="{%url 'assetmgt:update' object.id%}" class="btn btn-secondary" style="padding:10px;">Update</a>
+            <a href="{%url 'assetmgt:delete' object.id %}" class="btn btn-secondary"style="padding:10px; margin:10px;">Delete</a>
+        <div>
+    </div> 
+</div>   
+
 {%endblock%}
 
 

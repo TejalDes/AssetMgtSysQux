@@ -2,7 +2,7 @@
 {%extends '_blank.html'%}   
 {%block qux_content%} 
         {%for obj in object_list%}
-        <p>{{obj.emp_name}}</p>
+        <p>{{obj}}</p>
         {%empty%}
         <p>No data</p>
         {% endfor %}
