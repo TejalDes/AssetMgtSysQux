@@ -1,6 +1,9 @@
 {%extends '_blank.html'%}   
 {%block qux_content%} 
 {%block carddata%}
+<div class="container offset-md-5">
+    <h5 style="padding:10px;">Accessory Detail</h5>
+</div>
 <div class="container">
     <div class="row">
         <div class="col d-flex justify-content-center" style="padding:20px;">
@@ -20,7 +23,7 @@
 <div>
 {%endblock carddata%}  
 
-    
+{%if request.user.is_superuser%}    
 <div class="container">  
     <div class="col d-flex justify-content-center offset-md-5" >
         <div class="col" style="padding:5px;">
@@ -28,7 +31,8 @@
             <a href="{%url 'assetmgt:acc_delete' object.id %}" class="btn btn-secondary"style="padding:10px; margin:10px;">Delete</a>
         <div>
     </div> 
-</div>   
+</div>
+{%endif%}   
 
 {%endblock%}
 

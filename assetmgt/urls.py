@@ -1,9 +1,11 @@
 from django.urls import path
 from assetmgt.views import *
+from . import views
 
 app_name = "assetmgt"
 urlpatterns = [
     path("assets/", AssetView.as_view(), name="assetlist"),
+    path("base/", views.NavView, name="nav"),
     path("users/", UserView.as_view(), name="userlist"),
     path("assets/add/", AssetCreateView.as_view(), name="add"),
     path("assets/<int:pk>/", AssetUpdateView.as_view(), name="update"),
@@ -19,5 +21,6 @@ urlpatterns = [
     path(
         "accessories/<int:pk>/delete/", AccessoryDeleteView.as_view(), name="acc_delete"
     ),
+    path("accassets/<int:pk>/", AccAsset.as_view(), name="acc_asset"),
     path("<int:pk>/", AssetDetail.as_view(), name="assetdetail"),
 ]

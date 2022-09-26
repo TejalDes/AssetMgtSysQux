@@ -1,5 +1,8 @@
 {%extends '_blank.html'%}   
-{%block qux_content%} 
+{%block qux_content%}
+<div class="container offset-md-5">
+    <h5 style="padding:10px; padding-left:50px;">Asset Detail</h5>
+</div> 
 {%block carddata%}
 <div class="container">
     <div class="row">
@@ -16,6 +19,9 @@
                 <li class="list-group-item">Price: {{object.price}}</li>
                 <li class="list-group-item">User: {{object.user}}</li>
                 <li class="list-group-item">Date Allotted: {{object.date_allotted}}</li>
+                {% comment %} <li class="list-group=item">
+                    <a href="{%url 'assetmgt:acc_asset' object.id%}" class="btn btn-secondary" style="padding:10px;">Update</a>
+                </li> {% endcomment %}
                 </ul>
             </div>
         </div>
@@ -23,7 +29,7 @@
 <div>
 {%endblock carddata%}  
 
-    
+{%if request.user.is_superuser%}   
 <div class="container">  
     <div class="col d-flex justify-content-center offset-md-5" >
         <div class="col" style="padding:5px;">
@@ -31,7 +37,8 @@
             <a href="{%url 'assetmgt:delete' object.id %}" class="btn btn-secondary"style="padding:10px; margin:10px;">Delete</a>
         <div>
     </div> 
-</div>   
+</div>
+{%endif%}
 
 {%endblock%}
 

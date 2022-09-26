@@ -1,13 +1,8 @@
 {%extends '_blank.html'%}
 {%block qux_content%}
 <style>
-th,td {
-    padding : 5px;
-    border-style :solid;
-    border-width :1px;
-}
 
-a{
+.button{
     background-color:#787878;
     float:right;
     border:1px solid grey; 
@@ -24,27 +19,22 @@ a{
 <div class="container" style="text-align:center; padding:20px;">
     <div class="row">
       <div class="col">
-      </div>
-      <div class="col">
         <select id="type" onchange = "display();" style="float:left; padding:5px;border-radius:5px;">
-            <option value="All">Assets</option>
-            <option value="CPU">CPU</option>
-            <option value="Keyboard">Keyboard</option>
-            <option value="Mouse">Mouse</option>
-            <option value="Monitor">Monitor</option>
-        </select> 
+            <option value="Select">Select Type</option>
+            <option value="All">All</option>
+            {%for val in assettype%}
+            <option value={{val}}>{{val}}</option>
+            {% endfor %}
+        </select>  
         
-        <a href="{%url 'assetmgt:add' %}" style="">Add Asset</a>
-      </div>
-      <div class="col">
+        <a href="{%url 'assetmgt:add' %}" class="button">Add Asset</a>
       </div>
     </div>
   </div>
 
 <div class="container">
     <div class="row">
-      <div class="col-md-5 offset-md-2">
-        <table class="table table-hover" style="border:3px solid black">
+        <table class="table table-hover table-borderless table-md table-listview" style="border:1px solid grey; border-radius: 10px;margin-left:auto;margin-right:auto;">
             <tr style="background-color:#b4b4b4;">
                 <th>ID</th>
                 <th>Model ID</th>
@@ -54,6 +44,8 @@ a{
                 <th>Price</th>
                 <th>User</th>
                 <th>Date Allotted</th>
+                <th></th>
+                <th></th>
             </tr>
             {%for obj in assetmodel_list%}
             <tr onclick="showdetails({{obj.id}});">
@@ -62,15 +54,16 @@ a{
                 <td>{{obj.brand_name}}</td>
                 <td>{{obj.type_of_asset}}</td>
                 <td>{{obj.date_procured}}</td>
-                <td>{{obj.price}}</td>
+                <td style="text-align:right;">{{obj.price}}</td>
                 <td>{{obj.user}}</td>
                 <td>{{obj.date_allotted}}</td>
+                <td><button class='button'>Update</button></td>
+                <td><button class='button'>Delete</button></td>
             </tr>
             {%empty%}
                 <p>No Data</p>
             {%endfor%}
         </table>        
-      </div>
     </div>
   </div>
 {%endblock%}
