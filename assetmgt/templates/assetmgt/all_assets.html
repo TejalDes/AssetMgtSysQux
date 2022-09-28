@@ -1,17 +1,5 @@
 {%extends '_blank.html'%}
 {%block qux_content%}
-<style>
-
-.button{
-    background-color:#787878;
-    float:right;
-    border:1px solid grey; 
-    border-radius:5px;
-    color:white;
-    padding:5px;
-}
-</style>
-
 <div>
     <h3 style="text-align:center; padding:20px;">Assets Available</h3>
 </div>
@@ -27,7 +15,7 @@
             {% endfor %}
         </select>  
         
-        <a href="{%url 'assetmgt:add' %}" class="button">Add Asset</a>
+        <a href="{%url 'assetmgt:add' %}" class="btn btn-secondary btn-md" style="float:right;">Add Asset</a>
       </div>
     </div>
   </div>
@@ -44,8 +32,10 @@
                 <th>Price</th>
                 <th>User</th>
                 <th>Date Allotted</th>
+                {% if user.is_superuser %}
                 <th></th>
                 <th></th>
+                {%endif%}
             </tr>
             {%for obj in assetmodel_list%}
             <tr onclick="showdetails({{obj.id}});">
@@ -57,8 +47,10 @@
                 <td style="text-align:right;">{{obj.price}}</td>
                 <td>{{obj.user}}</td>
                 <td>{{obj.date_allotted}}</td>
-                <td><button class='button'>Update</button></td>
-                <td><button class='button'>Delete</button></td>
+                {% if user.is_superuser %}
+                <td><a href="{%url 'assetmgt:update' obj.id%}" class="btn btn-secondary">Update</a></td>
+                <td><a href="{%url 'assetmgt:delete' obj.id%}" class="btn btn-secondary">Delete</a></td>
+                {%endif%}
             </tr>
             {%empty%}
                 <p>No Data</p>

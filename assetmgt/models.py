@@ -5,19 +5,18 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 
 
+class AssetType(CoreModel):
+    name = models.CharField(max_length=20, verbose_name="Asset Type")
+
+    def __str__(self):
+        return self.name
+
+
 class AssetModel(CoreModel):
-
-    ASSET_TYPE = [
-        ("CPU", "CPU"),
-        ("Keyboard", "Keyboard"),
-        ("Mouse", "Mouse"),
-        ("Monitor", "Monitor"),
-    ]
-
     model_id = models.CharField(max_length=20, verbose_name="Model ID")
     brand_name = models.CharField(max_length=15, verbose_name="Brand")
-    type_of_asset = models.CharField(
-        blank=False, choices=ASSET_TYPE, max_length=30, verbose_name="Type"
+    type_of_asset = models.ForeignKey(
+        AssetType, on_delete=models.DO_NOTHING, verbose_name="Asset Type"
     )
     date_procured = models.DateField(verbose_name="Date Procured")
     price = models.FloatField(verbose_name="Price")
@@ -34,21 +33,19 @@ class AssetModel(CoreModel):
     )
 
     def __str__(self):
-        return str(self.id) + self.type_of_asset
+        return str(self.id) + self.type_of_asset.name
 
     def get_absolute_url(self):
         return reverse("assetmgt:assetdetail", kwargs={"pk": self.pk})
-
-    @classmethod
-    def get_types(self):
-        return self.ASSET_TYPE
 
 
 class Accessories(CoreModel):
     model_id = models.CharField(max_length=30, verbose_name="Model ID")
     accessory_type = models.CharField(max_length=20, verbose_name="Type")
     asset = models.ForeignKey(
-        AssetModel, on_delete=models.CASCADE, verbose_name="Of Asset"
+        AssetModel,
+        on_delete=models.CASCADE,
+        verbose_name="Of Asset",
     )
 
     def __str__(self):

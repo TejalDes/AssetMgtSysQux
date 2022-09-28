@@ -5,8 +5,6 @@ from . import views
 app_name = "assetmgt"
 urlpatterns = [
     path("assets/", AssetView.as_view(), name="assetlist"),
-    path("base/", views.NavView, name="nav"),
-    path("users/", UserView.as_view(), name="userlist"),
     path("assets/add/", AssetCreateView.as_view(), name="add"),
     path("assets/<int:pk>/", AssetUpdateView.as_view(), name="update"),
     path("assets/<int:pk>/delete/", AssetDeleteView.as_view(), name="delete"),
